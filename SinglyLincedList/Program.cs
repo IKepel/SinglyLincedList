@@ -2,13 +2,17 @@
 
 var myLinkedList = new MyLinkedList<int>();
 
-myLinkedList.AddPoint(new Point<int>(10));
-myLinkedList.AddPoint(new Point<int>(12));
-myLinkedList.AddPoint(new Point<int>(13));
+var point1 = new Point<int>(10);
+var point2 = new Point<int>(12);
+var point3 = new Point<int>(13);
+
+myLinkedList.AddPoint(point1);
+myLinkedList.AddPoint(point2);
+myLinkedList.AddPoint(point3);
 
 myLinkedList.Print();
 
-myLinkedList.Remove(myLinkedList.GetTail());
+myLinkedList.Remove(point1);
 
 Console.WriteLine("After removing a point:");
 myLinkedList.Print();

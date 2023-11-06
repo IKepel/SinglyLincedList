@@ -8,76 +8,44 @@ namespace SinglyLincedList
 {
     public class MyLinkedList<T>
     {
-        private Point<T> _head;
-
-        private Point<T> _tail;
+        private List<Point<T>> _points = new();
 
         public void AddPoint(Point<T> point)
         {
-            if (_head == null)
-            {
-                _head = point;
-                _tail = point;
-            }
+            if (_points.Count == 0)
+                _points.Add(point);
             else
             {
-                _tail.NextPoint = point;
-                _tail = point;
+                _points.Last().NextPoint = point;
+                _points.Add(point);
             }
         }
 
         public void Remove(Point<T> point)
         {
-            if (_head == null)
-                return;
+            _points.Remove(point);
 
-            if (_head == point)
+            foreach (var p in _points)
             {
-                _head = _head.NextPoint;
-                if (_head == null)
-                    _tail = null;
-            }
-            else
-            {
-                Point<T> current = _head;
-                while (current.NextPoint != null)
+                if (p.NextPoint == point)
                 {
-                    if (current.NextPoint == point)
-                    {
-                        current.NextPoint = point.NextPoint;
-                        if (point == _tail)
-                            _tail = current;
-                        break;
-                    }
-                    current = current.NextPoint;
+                    p.NextPoint = point.NextPoint;
+                    break;
                 }
+            }
+        }
+
+        public void Print()
+        {
+            foreach (var point in _points)
+            {
+                Console.WriteLine(point.Value);
             }
         }
 
         public void Clear()
         {
-            _head = null;
-            _tail = null;
-        }
-
-        public void Print()
-        {
-            Point<T> current = _head;
-            while (current != null)
-            {
-                Console.WriteLine(current.Value);
-                current = current.NextPoint;
-            }
-        }
-
-        public Point<T> GetHead()
-        {
-            return _head;
-        }
-
-        public Point<T> GetTail()
-        {
-            return _tail;
+            _points.Clear();
         }
     }
 }
